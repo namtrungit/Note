@@ -1,0 +1,45 @@
+Basic:
+	- [abc]: single char must be "a or b or c"
+	- abc: single char must be 'abc'
+	- ^: begin char
+	- $: end char
+	- [^abc]: everything except abc
+	- \d: digit
+	- \D: not digit
+	- \s: space
+	- \S: not space
+	- \w: word
+	- \W: not word
+	- [a-z]: a->z english char lowcase
+	- [A-Z]: A->Z Enlish char upcase
+
+
+
+Matching {x} Repetitions:
+	-Hiển thị x số lần xuất hiện của ký tự, cụm ký tự,..
+	-Vd:	
+		a{x} => hiển thị x số lần xuất hiện của a
+Matching {x, y} Repetitions
+	-Giống {x} nhưng có thể cụ thể hóa số lần chỉ định
+	-Vd:
+		a{x,y} => hiện thị a xuất hiện thừ x -> y lần
+Matching Zero Or More Repetitions => use *
+	-vd:
+		a* => a xuất hiện 0 -> n lần thì lấy => TH: text='bc' thì vẫn pass
+
+Matching One Or More Repetitions => use +
+	-vd:
+		a+ => a phải xuất hiện từ 1->n lần thì lấy => TH: text='bc' thì fail
+
+Matching Word Boundaries => use \b
+	-Xác định tuyệt đối đối tượng chỉ định trong \b{text}\b
+	-vd: regex= \babc\b   => text='abc' (pass) text='ab'(fail) text= 'abc tr'(pass)
+
+
+Capturing & Non-Capturing Groups: ( )
+	-https://docs.microsoft.com/en-us/dotnet/standard/base-types/quantifiers-in-regular-expressions
+	-Use for group condition Regex
+
+Alternative Matching: |
+	-Compare condition in () 
+	-Ex: (ABC|abc) => txt="ab" (fail) txt="abc" (pass)
