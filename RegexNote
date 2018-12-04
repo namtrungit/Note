@@ -43,3 +43,49 @@ Capturing & Non-Capturing Groups: ( )
 Alternative Matching: |
 	-Compare condition in () 
 	-Ex: (ABC|abc) => txt="ab" (fail) txt="abc" (pass)
+
+
+
+REX ENGINE:
+Backreferences To Failed Groups:
+	- (pattern)\1 => pattern = (\w,\i,abc,....), \1 pattern must repeat 1 time
+	- (pattern)\1{option}: (option) time of pattern must repeat. ex: (a)\1{2} => a must repeat 2 times -> aaa(pass)
+	- Practice Ex: https://www.hackerrank.com/challenges/backreferences-to-failed-groups/problem
+
+Forward References:
+	- Struc: (\2pattern_1|(pattern2))+
+	- Forward reference creates a back reference to a regex that would appear later. 
+	- Forward references are only useful if they're inside a repeated group. 
+	- Ex: https://www.hackerrank.com/challenges/forward-references/problem
+
+Branch Reset Group: Only support by Perl, PHP, Delphi
+	- Structure: (?|(rex1)|(rex2))/1
+	- Ex: https://www.hackerrank.com/challenges/branch-reset-groups/problem?h_r=next-challenge&h_v=zen
+
+
+
+
+
+
+
+Positive lookahead: struc: regex1(?=regex2)
+	- Asserts regex1 to be immediately followed by regex2
+	- Lookahead is excluded from the match
+	- Not match regex2, just  match regex1
+	- Ex: https://www.hackerrank.com/challenges/positive-lookahead/problem
+
+Negative lookahead: struc: regex1(?!regex2)
+	- Assert regex 1 not to be imnediately followed by regex2
+	- Lookahead is excluded from the match
+        - Not match regex2, just match regex1
+	- Ex: https://www.hackerrank.com/challenges/negative-lookahead/problem?h_r=next-challenge&h_v=zen
+
+Positive Lookbehind: struc: (?<=regex2)regex1
+	- Assert regex1 to be immediately preceded by regex2
+	- Lookbehind is excluded from the match
+        - Not match regex2, just match regex1
+
+Negative Lookbehind: struc: (?<!regex2)regex1
+	- Assert regex1 not to be immediately preceded by regex2
+	- Lookbehind is exclude from the match
+	- Not match regex2, just match regex1

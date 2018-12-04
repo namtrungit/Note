@@ -2,6 +2,7 @@
 	- Split vertically: Super key + %
 	- Split horizontally: Super key + "
 	- Full Screen / minimize: Super + z
+	- Scroll Super key + PageUp/PageDown
 	- New tmux session with name: tmux new -s [name]
 	- List all tmux sessions: tmux ls
 	- attach: tmux a -t [tmux_name]
