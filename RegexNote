@@ -62,7 +62,10 @@ Branch Reset Group: Only support by Perl, PHP, Delphi
 	- Structure: (?|(rex1)|(rex2))/1
 	- Ex: https://www.hackerrank.com/challenges/branch-reset-groups/problem?h_r=next-challenge&h_v=zen
 
-
+Group number: 
+	-Struc: (\w)(\w)(\w)n\1\2\3
+		- \1 references the first capture group(\w)
+	-Ex: https://www.hackerrank.com/challenges/matching-same-text-again-again/problem
 
 
 
