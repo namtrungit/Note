@@ -14,7 +14,6 @@ Basic:
 	- [A-Z]: A->Z Enlish char upcase
 
 
-
 Matching {x} Repetitions:
 	-Hiển thị x số lần xuất hiện của ký tự, cụm ký tự,..
 	-Vd:	
@@ -30,6 +29,9 @@ Matching Zero Or More Repetitions => use *
 Matching One Or More Repetitions => use +
 	-vd:
 		a+ => a phải xuất hiện từ 1->n lần thì lấy => TH: text='bc' thì fail
+
+Matching Zero or One Repetitions => use ?
+
 
 Matching Word Boundaries => use \b
 	-Xác định tuyệt đối đối tượng chỉ định trong \b{text}\b

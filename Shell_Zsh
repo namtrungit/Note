@@ -6,6 +6,7 @@
 	- New tmux session with name: tmux new -s [name]
 	- List all tmux sessions: tmux ls
 	- attach: tmux a -t [tmux_name]
+	- Kill tmux session: tmux kill-session -t [session name]
 2. Zsh
 	a. Zsh plugins
 	b. Themes
