@@ -8,12 +8,14 @@ Basic:
 	- \D: not digit
 	- \s: space
 	- \S: not space
-	- \w: word
+	- \w: word (equal to a-zA-z0-9_)
 	- \W: not word
 	- [a-z]: a->z english char lowcase
 	- [A-Z]: A->Z Enlish char upcase
 
 
+Email Regex: ([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9_-]+)
+Domain Regex: /https?:\/\/(?:www\.|ww2\.)?([a-zA-Z\d-]+(?:\.[a-zA-Z\d-]+)+)/
 
 Matching {x} Repetitions:
 	-Hiển thị x số lần xuất hiện của ký tự, cụm ký tự,..
@@ -32,13 +34,18 @@ Matching One Or More Repetitions => use +
 		a+ => a phải xuất hiện từ 1->n lần thì lấy => TH: text='bc' thì fail
 
 Matching Word Boundaries => use \b
-	-Xác định tuyệt đối đối tượng chỉ định trong \b{text}\b
-	-vd: regex= \babc\b   => text='abc' (pass) text='ab'(fail) text= 'abc tr'(pass)
+	- Xác định chính xác keyword theo quy tắc của UK-US
+	- Ex cụ thể https://www.hackerrank.com/challenges/find-a-word/problem
 
-
-Capturing & Non-Capturing Groups: ( )
-	-https://docs.microsoft.com/en-us/dotnet/standard/base-types/quantifiers-in-regular-expressions
-	-Use for group condition Regex
+Capture and Non-Capture group:
+	- Khi match một string với Regex có group(), nếu pass thì result trả về chỉnhững regex có trong group
+	- Non-Capture thì ngược lại, nếu muốn group đó không trả về giá trị match được, thì dùng Non-capture group
+	Capture Group: ()
+		- Chỉ trả về giá trị trong group khi trong 1 chuỗi Regex có ()
+		- Ex: str = buinamtrung, regex = /(bui)nam(trung)/ => OP:bui trung
+	Non-Capture Groups: (?:)
+		- Không trả về giá trị trong group trong 1 chuỗi Regex có ()
+		- Ex: str = buinamtrung, regex = /(bui)nam(?:trung)/ => OP: bui
 
 Alternative Matching: |
 	-Compare condition in () 
@@ -88,7 +95,7 @@ Positive Lookbehind: struc: (?<=regex2)regex1
 	- Lookbehind is excluded from the match
         - Not match regex2, just match regex1
 
-Negative Lookbehind: struc: (?<!regex2)regex1
+Negative Lookbehind: struc: (?<!regex1)regex1
 	- Assert regex1 not to be immediately preceded by regex2
 	- Lookbehind is exclude from the match
 	- Not match regex2, just match regex1
