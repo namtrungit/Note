@@ -1,0 +1,72 @@
+++ Arithmetic Operations
+Example: 
+~$ echo "5+5"
+5+5
+~$ echo "5+5"| bc
+10
+~$ echo "5+5"| bc -l
+10
+~$ echo "5+5.2"| bc -l
+10.2
+~$ echo "5+5.2"| bc
+10.2
+~$ echo "3/4"| bc
+0
+~$ echo "3/4"| bc -l
+.75000000000000000000 
+~$ echo $((3+3))
+6
+
+"str" | bc giúp parse "str" thành phép tính
+-l parse kết quả sang kiểu float với (/)
+scale = n => print n số sau dấu phẩy
+
+echo "scale = 2; 4 / 3" | bc
+=>1.33
+
+
+++ LOOP
+Ex:
+for i in 1 2 3 4 5
+do
+  echo "Looping ... number $i"
+done
+
+
+
+
+
+++ ARRAY
+declare: array=(1 2 3 4 5)
+print: 
+- all: echo ${array[@]} or ${array[*]}
+- by index: echo ${array[index]}
+
+
+++ awk
+- Help to find rows, columns in file.
+- Syntax 
+	+ awk '{print}' test.txt  //Xuất tất cả row trong file test
+	+ awk '{print $n}' test.txt //Xuất rows thứ n trong file test
+	+ Có thể áp dụng if condition trong {}
+	+ Có thể sử dụng Regex trong awk Ex: awk '/[a-z]/ {print}'
+- https://www.thegeekstuff.com/2010/01/8-powerful-awk-built-in-variables-fs-ofs-rs-ors-nr-nf-filename-fnr/
+
+++ sed
+- Parse and tranfrom text
+
+Syntax:
+- sed [option] s/[text_keyword]/[replace_keyword]/[position]
+- [option] : 
+	+ '-e': Expression
+	+ '-r': Row => Example:https://www.hackerrank.com/challenges/sed-command-5/problem?h_r=next-challenge&h_v=zen&h_r=next-challenge&h_v=zen&h_r=next-challenge&h_v=zen&h_r=next-challenge&h_v=zen
+- [position] => ex: 1,2,3... 
+	+ If want replace all position use 'g'
+	+ Case Insensitive(C.I): 'i'
+		-- Note: Can fusion them like catch all word and C.I use 'gi'
+- Tutorial: 
+	+ https://www.hackerrank.com/challenges/text-processing-in-linux-the-sed-command-1/problem
+	+ https://www.folkstalk.com/2012/01/sed-command-in-unix-examples.html
+
+
+
