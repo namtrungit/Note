@@ -1,0 +1,322 @@
+Lawson acc: admin@stpeter.meperia.com/1qazxsw2
+Wheaton acc: admin@wfh@meperia.com/12345678
+Northside : admin@northside.meperia.comacc/1qazxsw2
+user acc: duybc@larion.com/12345678
+
+
+ssh m47: ssh ubuntu@192.16.9.47
+ssh demo: ssh demo
+ssh load test: ssh ubuntu@54.208.19.196
+
+
+
+scp ubuntu@172.16.9.51:/home/ubuntu/meperia/test/msss/releases/search-updater .
+copy file from m51 ve local va nguoc lai
+scp dia chi can may lay file ve vd: ubuntu@m51: /../.../.. dia chi de chua ve tai local ./
+'./' gan dia chi hien tai copy ve day
+vd : dung tai local
+scp ubuntu@m51:/home/ubuntu/meperia/test_1/msss/current/script/ctop ./
+
+------------------------------------------------------------------------------------------------------------------------------
+
+o may 51 test
+cd $TEST_1_MSSS = ~/meperia/test_1/msss/current$
+pwd = /home/ubuntu/meperia/test_1/msss/current
+ls -al show file
+
+------------------------------------------------------------------------------------------------------------------------------
+tat delayjob
+
+cd $TEST_MSSS
+
+list ra deplayed_jobs : ./script/list_dir_delayed_jobs
+stop delayjob:
+RAILS_ENV=production ruby script/delayed_job stop
+kiem tra lai list delayjob : ./script/list_dir_delayed_jobs
+kill -9 ...
+
+------------------------------------------------------------------------------------------------------------------------------
+dọn lại bảng trong sql
+vacuum full analyze approved_facility_noun_types 
+reindex table approved_facility_noun_types
+
+---------------------------------------------------------------------------------------------------------------------------
+select * from user_settings where value ilike '%MSSS Full Description%' and user_email = 'admin@wfh.meperia.com'
+update user_settings set value = '2724927|38|meperia_full_desc|MSSS Full Description|Approved|true|' where id = 2724927
+cap nhat file
+
+-------------------------------------------------------------------------------------------------------------------------------
+trong man hinh VIM
+select * from facility_items where facility_id = 1 and master_item_id = 5207
+update facility_items set from_im = 'f' where id = 7235730
+update table set column
+
+--------------------------------------------------------------------------------------------------------------------------------
+lsof -wni tcp:3000 
+kill -9 PID
+( TCPServer Error: Address already in use - bind(2) )
+
+-----------------------------------------------------------------------------------------------------------------------------
+git show ma_ssh_hash_commit >thanhdb.diff
+nano ten_file.diff
+
+--------------------------------------------------------------------------------------------------------------------------------
+git log "show ssh hash"
+git log --oneline -decorate
+git log -3 "lay 3 commit moi nhat"
+
+--------------------------------------------------------------------------------------------------------------------------------
+git cherry-pick -x ma_ssh_hash_commit
+
+---------------------------------------------------------------------------------------------------------------------------------
+"cac buoc cherry-pick"
+.git checkout "nhanh can hot fix/release"
+.git checkout develop
+.git log --oneline "lay ma ssh hash commit"
+.git checkout "lai nhanh can hot fix/release"
+.git pull -r
+.git cherry-pick -x ma_ssh_hash_commit
+.git push origin "nhanh can hot fix/release"
+
+---------------------------------------------------------------------------------------------------------------------------------
+xoa cache
+ruby script/console production
+Rails.cache.clear
+
+---------------------------------------------------------------------------------------------------------------------------------
+git rebase
+
+.git checkout develop
+.git pull -r
+.git checkout "nhanh can rebase"
+.git pull -r
+.git rebase develop
+.git push -f origin nhanh can rebase
+
+---------------------------------------------------------------------------------------------------------------------------------
+deloy Jenkin
+http://172.16.9.90:8080/job/m51_test/
+**** m51_test
+---Build with Parameters---
+
+---------------------------------------------------------------------------------------------------------------------------------
+start delay job localhost
+rake jobs:work
+
+--------------------------------------------------------------------------------------------------------------------------
+curl https://github.com/BaThanh30.keys
+
+------------------------------------------------------------------------------------------------------------------------------
+list danh sach commit tren git
+
+git log --oneline --grep="label commit"
+
+
+
+-----------------------------------------------------------------------Cherry Pick/Hot fix--------------------------------------
+
+cherry pick hot fix
+git checkout qua nhanh release
+git pull -r
+git cherry-pick -x ma hash commit
+git show xem thay doi
+git push origin nhanh release
+
+bi conflic thi fix conflix xong roi 
+git add no vo
+xong git cherry-pick --continue
+git show xem thay doi
+git log xem lai commit
+git push origin len nhanh hotfix
+
+------------------------------------------------------------------Merge-----------------------------------------------------------------
+
+Merge code trc khia build
+Đưa các thay đổi từ nhánh develop vào nhánh feature
+
+git  checkout <some-feature-branch> 
+
+<commit and push all required changes> star from feature branch
+
+git fetch #  up to date branch origin/develop
+
+git rebase origin/develop
+
+#  must force push to remote right after rebase,  else to branches will be diverged and cause a lot troubles
+
+NOTE:  only push force to feature branch,  not on develop
+
+git push -f origin <some-feature-branch>
+
+Merge code from feature branch to develop
+Thực hiện rebase như trên trước rồi mới merge code
+
+git checkout develop
+
+git pull -r (make sure local develop is up to date with origin/develop)
+
+git merge --no-ff  <some-feature-branch>
+
+git push origin develop
+
+------------------------------------------------------------------------Add column org-----------------------------------------------------------------------------
+
+ruby script/generate org_migration add_columns_sub_account_to_requisitions
+
+content:
+class AddColumnsSubAccountToRequisitions < ActiveRecord::Migration
+  def self.up
+    add_column :requisitions, :default_sub_account_id, :integer
+    add_column :requisitions, :default_sub_account_name, :string
+    add_column :requisitions, :default_sub_account_account_number, :string
+  end
+
+  def self.down
+    remove_column :requisitions, :default_sub_account_id
+    remove_column :requisitions, :default_sub_account_name
+    remove_column :requisitions, :default_sub_account_account_number
+  end
+end
+
+
+migrate: rake meperia:migrations
+migrate cho org: rake meperia:migrate["ten org"]
+migrate down: rake meperia:migrations["ten org"down,"ma so truoc ten file db can r"]
+
+list org: rake meperia:list_orgs
+
+-------------------------------------------------------------------------Check lawson and set 2 id for textfield----------------------------------------------------------
+
+id : g_is_lawson? 'default_sub_account' : 'default_expense_code',
+
+-------------------------------------------------------------------------Create public key----------------------------------------
+
+ssh-keygen -t rsa
+Enter file in which to save the key (/home/local/ELARION/duybc/.ssh/id_rsa):  (Bam enter het)
+
+
+-------------------------------------------------------------------------Check crontab-----------------------------------------
+ssh demo
+crontab -l | grep 'ten moi truong'
+
+Time format in crontab:
+* * * * * *
+| | | | | |
+| | | | | +-- Year              (range: 1900-3000)
+| | | | +---- Day of the Week   (range: 1-7, 1 standing for Monday ... 0 for sunday)
+| | | +------ Month of the Year (range: 1-12)
+| | +-------- Day of the Month  (range: 1-31)
+| +---------- Hour              (range: 0-23, 1 in our example)
++------------ Minute            (range: 0-59, 10 in our example)
+
+---------------------------------------------------------------------------SVN commit------------
+
+status: svn status
+svn add 'path'
+svn commit -m "mess"
+
+
+
+---------------------------ec ec xem database tren terminal------------
+ssh mss-db@172.16.9.58
+sudo su postgres
+pass: 123QWEasd
+
+
+-------------------------------------Tool automation test -------------------------
+https://viblo.asia/p/bdd-voi-cucumber-trong-ruby-on-rails-ZK1ov1gVM5b9
+http://rspec.info/documentation/3.8/rspec-expectations/#should_syntax
+https://viblo.asia/p/tim-hieu-ve-rspec-trong-rails-ojaqG0B0REKw
+
+---------------------------DB-------------------------------------------------------------------
+cd ssh mss-db@172.16.9.58
+pass: 123QWEasd
+
+dump db: 
+	sudo su postgres
+pg_dump -Fc main_production > main_production_duybc.dump
+cap quyen cho thu muc neu permission denied: sudo chmod 777 db_dumps
+restore db voi 3 core:
+pg_restore -d main_production_duybc main_production_duybc.du -j 3
+
+	
+
+-----------------------------scp file from ssh to local----------------------------------------
+scp ubuntu@172.16.9.51:/home/ubuntu/meperia/test/msss/current/script/ctop ./
+scp ubuntu@172.16.9.47:/home/ubuntu/meperia/test/msss/current/script/ctop ./
+
+
+----------------------config gui mail o local---------------------------------------------------
+xoa het record trong bang delayjob
+tat delayjob
+config/email.yml => :enable = true
+config/initializers/19_mailer.rb
+sửa ALLOWED_EMAILS thành mail của mình
+sửa ALLOWED_ORG_IDS thành org đang xài (38)
+
+
+-------------------------------------Send mail sau khi export contract--------------------------------------------------------------
+rake meperia:contract_mgmt:send_expiration_notification[38]
+
+--------------------------------------Xem Log-----------------------------------------
+ssh ubuntu@172.16.9.47
+pass: 1qazxsw2
+cd meperia/test/msss/current
+tailf log/production.log
+
+
+-------------------------------------
+https://svn.elarion.com/Repository/SDC/SDD1/Projects/MSS/Project_Engineering/2_Design/01_Software_Architecture_Design/02_Logical_View/2_Business_Layer/McKI_Detailed_Design_Contract_Loading/
+document hướng dẫn gitflow của dự án: https://svn.elarion.com/Repository/SDC/SDD1/Projects/MSS/Working_Individual/Shared/Devs/Common_Techniques/McKI_Development_Guidelines/McKI_Development_Guidelines.odt
+
+--------------------------------------Git rebase---------------------------
+git rebase
+
+.git checkout develop
+.git pull -r
+.git checkout "nhanh can rebase"
+.git pull -r
+.git rebase develop
+.git push -f origin nhanh can rebase
+----------------------------------------------------------------------------
+
+
+------check resource---------
+df -ah
+Check CPU. cot use tu 97% tro len thi bao
+
+cd meperia/demo18/current
+./script/list_dir_delayed_jobs
+Check delay jobs
+demo18 4cai
+demo16 4cai
+training 4cai
+demo_libviewer 2cai
+
+RAILS_ENV=production ruby script/delayed_job status : Check status cua moi truong hien tai (vd demo18)
+RAILS_ENV=production ruby script/delayed_job -n4 start : Start delay job
+
+stop: stop delay job
+restart
+
+htop: check mem vs cpu
+q thoat
+
+@here checkresource `demo` done
+thong bao len slack
+
+du -h --max-depth=1 .
+check dung luong thu muc
+
+Vim sync if solr < database:
+fast_update_vim_item[org_id]
+
+
+
+
+
+-------------connect db-----
+psql -U postgres -h 172.16.9.58
+\l
+\c production
+\d xem table
