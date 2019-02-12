@@ -1,0 +1,3 @@
+MYSQL
+- Get string character by LEFT() , RIGHT() func. Ex: LEFT('abc', 1) => a, RIGHT('abc', 2) => bc
+- Order by multi option. Ex: order by name, id asc
