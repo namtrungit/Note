@@ -1,0 +1,14 @@
+- cherry-pick -x 'commit_id' từ nhánh develop sang nhánh release
+- Tạo file diff trên local, scp file diff lên máy development   =>  git show b96288288cf91a5d148ff4ceb0980d539b890d29 > search_contract.diff
+-  Chạy file diff trên máy development patch -p1 -i /tmp/search_contract.diff
+- Restart lại ./restart.sh.
+- Resestart lại Delayjob nếu có.
+
+
+
+
+
+
+KT Delayjob:
+- RAILS_ENV=production ruby script/delayed_job status/stop
+- ./script/list_dir_delayed_jobs

@@ -1,0 +1,16 @@
+- Defer:
+	+ Skip func util other func complete
+	+ Deferred func calls are pushed onto stack. When a function returns, its deferred calls are excuted in last-in-first-out order.
+
+- Maps:
+	+ Insert: m[key] elem
+	+ Retrieve an element: elem = m[key]
+	+ Delete: delete(m, key)
+	+ Test that a key is present with a two-value assignment: elem, ok = m[key]
+		if key is in m, ok is true. If not, ok is false
+
+- Function values: https://tour.golang.org/moretypes/24
+
+- Methods: Go does not have classes. However, we can define methods on types
+
+- Pointer receiviers: https://tour.golang.org/methods/4 
