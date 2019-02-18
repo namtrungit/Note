@@ -13,4 +13,6 @@
 
 - Methods: Go does not have classes. However, we can define methods on types
 
-- Pointer receiviers: https://tour.golang.org/methods/4 
+- Pointer receiviers: https://tour.golang.org/methods/4
+
+- Interfaces: An interface type is defined as a set of method signatures. A value of interface type can hold any value that implements those methods. 
